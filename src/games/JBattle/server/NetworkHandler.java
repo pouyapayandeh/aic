@@ -9,6 +9,7 @@ import framework.network.GameServer;
 import framework.network.events.ClientConnectEvent;
 import framework.network.events.DataRecievedEvent;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Observable;
@@ -33,6 +34,12 @@ public class NetworkHandler implements Observer{
         clientSocket.getOwner().setName(name);
         game.addPlayer(clientSocket.getOwner());
         clientSocket.Response(game.getBoard().toJSONString());
+      //  JSONObject objs = new JSONObject(game.getBoardObjects());
+        JSONArray objs = new JSONArray();
+        objs.put(game.getBoardObjects()) ;
+        JSONObject wrap = new JSONObject();
+        wrap.put("objects",objs);
+        clientSocket.Response(wrap.toString());
         clientSocket.Response(((JBPlayer) clientSocket.getOwner()).toJSONString());
 
     }

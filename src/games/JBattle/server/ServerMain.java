@@ -19,6 +19,7 @@ public class ServerMain {
         JBattleGame g = new JBattleGame();
         g.setBoard(b);
         g.addObject(new GoldMine(500,0,0));
+        g.addObject(new GoldMine(300,1,1));
         JBattleGR jBattleGR =new JBattleGR(g);
         frameWrap.initUI(jBattleGR);
         GameServer server = new GameServer(1111);

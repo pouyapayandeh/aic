@@ -4,6 +4,7 @@ import framework.core.Game;
 import framework.network.ClientSocket;
 import framework.network.GameServer;
 import framework.network.events.DataRecievedEvent;
+import org.json.JSONObject;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -13,9 +14,11 @@ import java.util.Observer;
  */
 public class ClientNetworkHandler implements Observer {
     ClientSocket socket;
-
-    public ClientNetworkHandler( ClientSocket socket) {
+    WorldModel wm;
+    int phase = 0;
+    public ClientNetworkHandler( ClientSocket socket , WorldModel wm) {
         this.socket = socket;
+        this.wm=wm;
         socket.getDataRecievedEvent().addObserver(this);
     }
     @Override
@@ -23,7 +26,20 @@ public class ClientNetworkHandler implements Observer {
         if(o instanceof DataRecievedEvent)
         {
             Object[] args = (Object[])arg;
+            String data = (String)args[1];
             System.out.println(args[1]);
+            if(phase == 0)//Terrain Data
+            {
+                wm.setTerrain(new JSONObject((data)));
+                phase++;
+            }else if(phase == 1)
+            {
+                wm.setGoldMines(new JSONObject(data));
+                phase++;
+            }else if(phase == 2)
+            {
+                wm.setSelf(new JSONObject(data));
+            }
         }
 
     }

@@ -54,7 +54,7 @@ public class GameBoard implements JSONString{
     public String toJSONString() {
         JSONObject obj = new JSONObject();
         JSONArray array = new JSONArray(terrain);
-        obj.accumulate("terrain",array);
+        obj.put("terrain",array);
         return obj.toString();
     }
 }

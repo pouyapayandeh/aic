@@ -9,7 +9,8 @@ import org.json.JSONObject;
 public class ClientMain {
     public static void main(String[] args) {
         ClientSocket socket = new ClientSocket();
-        ClientNetworkHandler clientNetworkHandler = new ClientNetworkHandler(socket);
+        WorldModel wm = new WorldModel();
+        ClientNetworkHandler clientNetworkHandler = new ClientNetworkHandler(socket,wm);
         socket.connect("localhost",1111);
         JSONObject object =new JSONObject();
         object.accumulate("name","Pouya");
