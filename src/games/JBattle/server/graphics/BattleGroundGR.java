@@ -3,11 +3,8 @@ package games.JBattle.server.graphics;
 import framework.core.GameBoard;
 import framework.graphics.BoardGraphicalRepresentation;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by Pouya Payandeh on 10/24/2015.
@@ -17,9 +14,9 @@ public class BattleGroundGR extends BoardGraphicalRepresentation {
     public BattleGroundGR(GameBoard board, int tileWidth, int tileHeight) {
         super(board, tileWidth, tileHeight);
         terrain_stone = new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_BGR);
-        loadTexture(terrain_stone,"f:\\terrain_stone.jpg");
+        loadTexture(terrain_stone, "/textures/JBattle/terrain_stone.jpg");
         terrain_grass = new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_BGR);
-        loadTexture(terrain_grass,"f:\\terrain_grass.jpg");
+        loadTexture(terrain_grass,"/textures/JBattle/terrain_grass.jpg");
 
     }
 

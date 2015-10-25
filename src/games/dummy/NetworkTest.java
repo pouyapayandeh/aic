@@ -12,7 +12,7 @@ public class NetworkTest {
         gameServer.startServer();
         ClientSocket clientSocket =new ClientSocket();
         clientSocket.connect("127.0.0.1",1111);
-        clientSocket.Response("Hello\n");
+        clientSocket.response("Hello\n");
 
     }
 }

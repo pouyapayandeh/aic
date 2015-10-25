@@ -10,6 +10,11 @@ import java.util.ArrayList;
  */
 public class Game {
     protected GameBoard board;
+
+    public ArrayList<GamePlayer> getPlayers() {
+        return players;
+    }
+
     protected  ArrayList<GamePlayer> players;
 
     public ArrayList<BoardObject> getBoardObjects() {
@@ -57,7 +62,9 @@ public class Game {
     public void addAgents(GamePlayer p , GameAgent agent)
     {
         agent.agentId=p.agents.size();
+        agent.owner=p;
         p.agents.add(agent);
+
         board.objects[agent.getX()][agent.getY()].add(agent);
     }
     public void addObject(BoardObject obj)

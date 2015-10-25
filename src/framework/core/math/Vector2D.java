@@ -31,6 +31,11 @@ public class Vector2D implements JSONString{
         this.x = x;
         this.y = y;
     }
+    public Vector2D(JSONObject data)
+    {
+        this.x=data.getInt("x");
+        this.y=data.getInt("y");
+    }
     public void add(Vector2D v)
     {
         this.x+=v.x;
@@ -41,6 +46,11 @@ public class Vector2D implements JSONString{
         int xx = x-v.x;
         int yy = y-v.y;
         return (int) Math.sqrt(xx*xx+yy*yy);
+    }
+
+    @Override
+    public Vector2D clone()  {
+        return new Vector2D(x,y);
     }
 
     @Override

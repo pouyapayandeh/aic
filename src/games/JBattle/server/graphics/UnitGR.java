@@ -14,31 +14,49 @@ import java.awt.image.BufferedImage;
  * Created by Pouya Payandeh on 10/24/2015.
  */
 public class UnitGR extends BoardObjectGraphicalRepresentation {
-    private final BufferedImage texture_gold;
-
+    private  BufferedImage texture_gold;
+    private BufferedImage[] texture_castle, texture_warrior, texture_worker;
     public UnitGR(int tileWidth, int tileHeight) {
         super(tileWidth, tileHeight);
         texture_gold= new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_ARGB);
-        loadTexture(texture_gold,"f:\\texture_gold.png");
+        texture_castle = new BufferedImage[2];
+        texture_warrior = new BufferedImage[2];
+        texture_worker = new BufferedImage[2];
+        texture_castle[0] = new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_ARGB);
+        loadTexture(texture_castle[0], "/textures/JBattle/castle_0.png");
+        texture_castle[1] = new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_ARGB);
+        loadTexture(texture_castle[1], "/textures/JBattle/castle_1.png");
+
+        texture_warrior[0] = new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_ARGB);
+        loadTexture(texture_warrior[0], "/textures/JBattle/warrior_0.png");
+        texture_warrior[1] = new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_ARGB);
+        loadTexture(texture_warrior[1], "/textures/JBattle/warrior_1.png");
+
+        texture_worker[0] = new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_ARGB);
+        loadTexture(texture_worker[0], "/textures/JBattle/worker_0.png");
+
+        texture_worker[1] = new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_ARGB);
+        loadTexture(texture_worker[1], "/textures/JBattle/worker_1.png");
+
+        loadTexture(texture_gold, "/textures/JBattle/texture_gold.png");
     }
 
     @Override
     public void drawAgent(GameAgent ag, Graphics2D g) {
-        Color tc = g.getColor();
         int  x = ag.getX() * tileWidth;
         int  y = ag.getY() * tileHeight;
+        BufferedImage image = null;
         if((ag instanceof Warrior))
         {
-            g.setColor(Color.RED);
+            image=texture_warrior[ag.getOwner().getPlayerId()];
         }else if (ag instanceof Worker)
         {
-            g.setColor(Color.green);
+            image=texture_worker[ag.getOwner().getPlayerId()];
         }else
         {
-            g.setColor(Color.ORANGE);
+            image=texture_castle[ag.getOwner().getPlayerId()];
         }
-        g.fillArc(x,y,tileWidth,tileHeight,0,360);
-        g.setColor(tc);
+        g.drawImage(image,x,y,null);
     }
 
     @Override

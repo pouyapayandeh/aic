@@ -14,6 +14,6 @@ public class ClientMain {
         socket.connect("localhost",1111);
         JSONObject object =new JSONObject();
         object.accumulate("name","Pouya");
-        socket.Response(object.toString());
+        socket.response(object.toString());
     }
 }

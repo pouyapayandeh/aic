@@ -55,7 +55,7 @@ public class ClientSocket  implements  Runnable{
             e.printStackTrace();
         }
     }
-    public void Response(String s)
+    public void response(String s)
     {
         try {
             osw.write(s);

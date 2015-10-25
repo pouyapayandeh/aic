@@ -15,7 +15,6 @@ public class MoveCommand extends BasicCommand {
         super(player, agent);
         this.pos=pos;
     }
-
     @Override
     public void doCommand(Game game) {
         TurnBaseGame tg = (TurnBaseGame)game;

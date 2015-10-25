@@ -1,17 +1,21 @@
 package games.JBattle.server;
 
-import framework.core.Game;
-import framework.core.GamePlayer;
-import framework.core.TurnBaseGame;
+import framework.core.GameAgent;
 import framework.core.events.GameStartEvent;
+import framework.core.math.Vector2D;
 import framework.network.ClientSocket;
 import framework.network.GameServer;
 import framework.network.events.ClientConnectEvent;
 import framework.network.events.DataRecievedEvent;
 
+import games.JBattle.server.commands.MoveCommand;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,10 +25,17 @@ import java.util.Observer;
 public class NetworkHandler implements Observer{
     JBattleGame game;
     GameServer server;
-
+    Timer changeTurnTimer;
     public NetworkHandler(JBattleGame game, GameServer server) {
         this.game = game;
         this.server = server;
+        changeTurnTimer=new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeTurn();
+            }
+        });
+        changeTurnTimer.setRepeats(false);
         server.getClientConnectEvent().addObserver(this);
         server.getDataRecievedEvent().addObserver(this);
         game.getGameStartEvent().addObserver(this);
@@ -33,14 +44,14 @@ public class NetworkHandler implements Observer{
     {
         clientSocket.getOwner().setName(name);
         game.addPlayer(clientSocket.getOwner());
-        clientSocket.Response(game.getBoard().toJSONString());
+        clientSocket.response(game.getBoard().toJSONString());
       //  JSONObject objs = new JSONObject(game.getBoardObjects());
         JSONArray objs = new JSONArray();
         objs.put(game.getBoardObjects()) ;
         JSONObject wrap = new JSONObject();
         wrap.put("objects",objs);
-        clientSocket.Response(wrap.toString());
-        clientSocket.Response(((JBPlayer) clientSocket.getOwner()).toJSONString());
+        clientSocket.response(wrap.toString());
+        clientSocket.response(((JBPlayer) clientSocket.getOwner()).toJSONString());
 
     }
     public void makeNewPlayer(ClientSocket handler)
@@ -49,19 +60,67 @@ public class NetworkHandler implements Observer{
         player.setSocket(handler);
         handler.setOwner(player);
     }
+    public JSONObject turnData()
+    {
+        JSONObject data = new JSONObject();
+        JSONArray objsArray = new JSONArray();
+        objsArray.put(game.getBoardObjects()) ;
+        data.put("objects", objsArray);
+        JSONArray playerArray = new JSONArray();
+        playerArray.put(game.getPlayers());
+        data.put("players",playerArray);
+        return data;
+    }
     public void gameStarted()
     {
         JBPlayer player = (JBPlayer)game.CurrentPlayer();
-        player.socket.Response(player.toJSONString());
+        player.socket.response(turnData().toString());
+        changeTurnTimer.start();
+
+    }
+    public void changeTurn()
+    {
+        game.doTurn();
+        JBPlayer player = (JBPlayer)game.CurrentPlayer();
+        player.socket.response(turnData().toString());
+        changeTurnTimer.start();
     }
     public void dataRecieved(ClientSocket clientSocket,String s)
     {
         JSONObject object =new JSONObject(s);
         System.out.println(s);
-        if(object.has("name")) {
-            addNewPlayer(clientSocket,(String)object.get("name"));
-            if(game.isReadyToPlay())
-                game.start();
+        if(game.isStarted())
+        {
+            doTurn((JBPlayer) clientSocket.getOwner(),object);
+        }else {
+            if (object.has("name")) {
+                addNewPlayer(clientSocket, (String) object.get("name"));
+                if (game.isReadyToPlay())
+                    game.start();
+            }
+        }
+    }
+    public void doTurn(JBPlayer player,JSONObject data)
+    {
+        //TODO : May Collide with Timer ,
+        if(data.has("cmd"))
+        {
+            String cmdType = data.getString("cmd");
+            if(cmdType.equals("move"))
+            {
+                ArrayList<GameAgent> agents = player.getAgents();
+                GameAgent agent = null;
+                for(GameAgent c : agents)
+                {
+                    if (c.getAgentId() == data.getInt("id"))
+                        agent=c;
+                }
+                if(agent != null)
+                {
+                    MoveCommand mv = new MoveCommand(player, agent,new Vector2D(data.getJSONObject("pos")));
+                    mv.doCommand(game);
+                }
+            }
         }
     }
     @Override

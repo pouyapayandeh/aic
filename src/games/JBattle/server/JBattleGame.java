@@ -10,6 +10,11 @@ import games.JBattle.server.agents.Castle;
 public class JBattleGame extends TurnBaseGame{
     int cp =0;
     final int maxPlayer =1;
+    boolean started = false;
+
+    public boolean isStarted() {
+        return started;
+    }
 
     public boolean isReadyToPlay() {
         return readyToPlay;
@@ -33,6 +38,7 @@ public class JBattleGame extends TurnBaseGame{
         Castle castle = new Castle();
         castle.setPosition(0,4);
         addAgents(CurrentPlayer(),castle);
+        started=true;
         super.start();
     }
 }

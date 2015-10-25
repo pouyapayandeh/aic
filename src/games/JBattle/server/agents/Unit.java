@@ -42,6 +42,7 @@ public class Unit extends GameAgent implements JSONString {
         JSONObject obj = new JSONObject();
         obj.accumulate("type", this.type);
         obj.accumulate("id",agentId);
+        obj.accumulate("owner",getOwner().getPlayerId());
         obj.accumulate("pos", this.getPos());
         obj.accumulate("HP", this.getHP());
         obj.accumulate("ATK", this.getHP());

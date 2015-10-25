@@ -13,8 +13,10 @@ public class WorldModel {
     int[][] terrain;
     ArrayList<ClientGoldMine> goldMines;
     ClientPlayer self;
+    ArrayList<ClientPlayer> others;
     public WorldModel() {
         goldMines=new ArrayList<>();
+        others = new ArrayList<>();
     }
 
     void setTerrain(JSONObject data)
@@ -43,5 +45,11 @@ public class WorldModel {
     void setSelf(JSONObject data)
     {
         self = new ClientPlayer(data);
+    }
+    void update(JSONObject data)
+    {
+        setGoldMines(data);
+        self.updateAgents(data.getJSONArray("players").getJSONArray(0).getJSONObject(0).
+                getJSONArray("Agents").getJSONArray(0).getJSONArray(0));
     }
 }
