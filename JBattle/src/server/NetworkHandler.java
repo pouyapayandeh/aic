@@ -9,6 +9,9 @@ import network.events.ClientConnectEvent;
 import network.events.ClientDisconnectEvent;
 import network.events.DataRecievedEvent;
 
+import server.commands.AttackCommand;
+import server.commands.BasicCommand;
+import server.commands.MakeCommand;
 import server.commands.MoveCommand;
 import json.JSONArray;
 import json.JSONObject;
@@ -75,7 +78,7 @@ public class NetworkHandler implements Observer{
     }
     public void gameStarted()
     {
-  //      JBPlayer player = (JBPlayer)game.CurrentPlayer();
+  //      JBPlayer player = (JBPlayer)game.currentPlayer();
     //    player.socket.response(turnData().toString());
         changeTurnTimer.start();
 
@@ -83,7 +86,7 @@ public class NetworkHandler implements Observer{
     public void changeTurn()
     {
         game.doTurn();
-        JBPlayer player = (JBPlayer)game.CurrentPlayer();
+        JBPlayer player = (JBPlayer)game.currentPlayer();
         player.lastMoveTime=System.nanoTime();
         player.socket.response(turnData().toString());
         changeTurnTimer.start();
@@ -107,27 +110,42 @@ public class NetworkHandler implements Observer{
     public void doTurn(JBPlayer player,JSONObject data)
     {
         //TODO : May Collide with Timer ,
-        if(data.has("cmd"))
+        if(data.has("cmds"))
         {
-            String cmdType = data.getString("cmd");
-            if(cmdType.equals("move"))
+            for(Object singleCmdObj : data.getJSONArray("cmds"))
             {
+                JSONObject singleCmd = (JSONObject) singleCmdObj;
+                String cmdType = singleCmd.getString("cmd");
                 ArrayList<GameAgent> agents = player.getAgents();
+                Vector2D pos =new Vector2D(singleCmd.getJSONObject("pos"));
                 GameAgent agent = null;
-                for(GameAgent c : agents)
+                for (GameAgent c : agents)
                 {
-                    if (c.getAgentId() == data.getInt("id"))
-                        agent=c;
+                    if (c.getAgentId() == singleCmd.getInt("id"))
+                        agent = c;
                 }
-                if(agent != null)
+                if (agent != null)
                 {
-                    MoveCommand mv = new MoveCommand(player, agent,new Vector2D(data.getJSONObject("pos")));
+                    BasicCommand mv = null;
+                    if (cmdType.equals("move"))
+                    {
+                         mv = new MoveCommand(player, agent, pos);
+                    }
+                    if (cmdType.equals("attack"))
+                    {
+                        mv = new AttackCommand(player, agent, pos);
+                    }
+                    if (cmdType.equals("make"))
+                    {
+                        mv = new MakeCommand(player, agent, pos,singleCmd.getString("type"));
+                    }
                     mv.doCommand(game);
-                    System.out.println(System.nanoTime()-player.lastMoveTime);
-                    player.lastMoveTime=System.nanoTime();
                 }
             }
         }
+        System.out.println(System.nanoTime() - player.lastMoveTime);
+        player.lastMoveTime = System.nanoTime();
+
     }
     @Override
     public void update(Observable o, Object arg) {

@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * Created by Pouya Payandeh on 10/24/2015.
  */
 public class WorldModel {
+
     private int[][] terrain;
     ArrayList<GoldMine> goldMines;
     Player self;
@@ -27,6 +28,9 @@ public class WorldModel {
     }
     public int[][] cloneTerrain()
     {
+        /*
+        TODO:use System.copyarray
+         */
         int [][] t = new int[getWidth()][getHeight()];
         for(int i = 0 ; i < getWidth() ; i++)
             for (int j = 0 ; j < getHeight() ; j++)

@@ -1,5 +1,6 @@
 package client;
 
+import client.commands.Command;
 import network.ClientSocket;
 import network.events.DataRecievedEvent;
 import client.commands.MoveCommand;
@@ -11,13 +12,13 @@ import java.util.Observer;
 /**
  * Created by Pouya Payandeh on 10/24/2015.
  */
-public class Handler implements Observer {
+public class NetworkHandler implements Observer {
     ClientSocket socket;
     WorldModel wm;
     int phase = 0;
     boolean gameStarted=false;
     PlayerAI ai;
-    public Handler(ClientSocket socket, WorldModel wm, PlayerAI ai) {
+    public NetworkHandler(ClientSocket socket, WorldModel wm, PlayerAI ai) {
         this.socket = socket;
         this.wm=wm;
         this.ai=ai;
@@ -26,11 +27,17 @@ public class Handler implements Observer {
     public void doTurn(JSONObject data)
     {
         wm.update(data);
-        MoveCommand cmd =ai.doTurn(wm);
-        if(cmd != null)
-            socket.response(cmd.toJSONString());
-        else
-            socket.response("{}");
+        ai.doTurn(wm);
+        JSONObject responseData = new JSONObject();
+        for(Unit u : wm.self.agents)
+        {
+            Command c = u.getCmd();
+            if(c != null)
+            {
+                responseData.append("cmds",c);
+            }
+        }
+        socket.response(responseData.toString());
     }
     @Override
     public void update(Observable o, Object arg) {
@@ -43,15 +50,15 @@ public class Handler implements Observer {
             {
                 doTurn(new JSONObject(data));
             }
-            if(phase == 0)//Terrain Data
+            if(phase == 0)//Reading Terrain Data
             {
                 wm.setTerrain(new JSONObject((data)));
                 phase++;
-            }else if(phase == 1)
+            }else if(phase == 1)//Reading GoldMine Location
             {
                 wm.setGoldMines(new JSONObject(data));
                 phase++;
-            }else if(phase == 2)
+            }else if(phase == 2)//Reading Self info
             {
                 wm.setSelf(new JSONObject(data));
                 phase++;

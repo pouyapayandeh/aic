@@ -10,7 +10,7 @@ import json.JSONString;
  * Created by Pouya Payandeh on 10/24/2015.
  */
 public class JBPlayer extends GamePlayer implements JSONString {
-    int gold;
+    public int gold;
     long lastMoveTime;
     public void setSocket(ClientSocket socket) {
         this.socket = socket;
@@ -18,7 +18,7 @@ public class JBPlayer extends GamePlayer implements JSONString {
 
     ClientSocket socket;
     public JBPlayer() {
-        gold =200;
+        gold =Settings.StartGold;
     }
 
 

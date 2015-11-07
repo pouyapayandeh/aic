@@ -67,6 +67,12 @@ public class Game {
 
         board.objects[agent.getX()][agent.getY()].add(agent);
     }
+    public void removeAgent(GameAgent agent)
+    {
+        agent.getOwner().agents.remove(agent);
+        board.objects[agent.getX()][agent.getY()].remove(agent);
+    }
+
     public void addObject(BoardObject obj)
     {
         objects.add(obj);

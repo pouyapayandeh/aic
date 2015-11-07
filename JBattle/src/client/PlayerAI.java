@@ -1,5 +1,6 @@
 package client;
 
+import client.commands.Direction;
 import core.math.Vector2D;
 import client.commands.MoveCommand;
 
@@ -10,19 +11,14 @@ import java.util.Random;
  */
 public class PlayerAI
 {
-    public MoveCommand doTurn(WorldModel wm){
-        Vector2D pos = wm.self.agents.get(0).getPos();
-        //wm.self.agents.get(0).
+    public void doTurn(WorldModel wm){
+        Unit c = wm.self.agents.get(0);
 
         Random r= new Random();
         if(r.nextDouble() > 0.5)
-            pos.x--;
+            c.move(Direction.E);
         else
-            pos.x++;
+            c.move(Direction.W);
 
-
-
-        MoveCommand cmd =new MoveCommand(0,pos);
-        return cmd;
     }
 }

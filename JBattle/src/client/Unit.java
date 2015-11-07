@@ -66,6 +66,12 @@ public class Unit
     private int HP;
     private int ATK;
     private Vector2D pos;
+
+    public Command getCmd()
+    {
+        return cmd;
+    }
+
     private Command cmd;
     public Unit(JSONObject data) {
         type=UnitType.valueOf(data.getString("type"));

@@ -8,9 +8,9 @@ import json.JSONString;
  * Created by Pouya Payandeh on 10/24/2015.
  */
 public class Unit extends GameAgent implements JSONString {
-    protected int HP;
-    protected int ATK;
-    protected int movePerTurn;
+    public int HP;
+    public int ATK;
+    public int movePerTurn;
 
     public String getType() {
         return type;
@@ -22,21 +22,12 @@ public class Unit extends GameAgent implements JSONString {
         this.type=type;
     }
 
-    public int getMovePerTurn() {
-        return movePerTurn;
+    public Unit(String type,int HP,int ATK) {
+        this.type=type;
+        this.HP = HP;
+        this.ATK = ATK;
     }
 
-    public int getATK() {
-        return ATK;
-    }
-
-    public int getHP() {
-        return HP;
-    }
-
-    public boolean isMovable() {
-        return movePerTurn != 0;
-    }
     public String toJSONString()
     {
         JSONObject obj = new JSONObject();
@@ -44,8 +35,8 @@ public class Unit extends GameAgent implements JSONString {
         obj.accumulate("id",agentId);
         obj.accumulate("owner",getOwner().getPlayerId());
         obj.accumulate("pos", this.getPos());
-        obj.accumulate("HP", this.getHP());
-        obj.accumulate("ATK", this.getHP());
+        obj.accumulate("HP",HP);
+        obj.accumulate("ATK", ATK);
         return  obj.toString();
     }
 }

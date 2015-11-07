@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Player
 {
-    int gold;
+    public int gold;
     int id;
     String name;
     ArrayList<Unit> agents;

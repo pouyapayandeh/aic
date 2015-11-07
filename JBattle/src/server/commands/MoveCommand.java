@@ -19,7 +19,7 @@ public class MoveCommand extends BasicCommand {
     public void doCommand(Game game) {
         TurnBaseGame tg = (TurnBaseGame)game;
         GameBoard board =tg.getBoard();
-            if(checkPlayer(tg.CurrentPlayer()))
+            if(checkPlayer(tg.currentPlayer()))
             {
                 if(agent.getPos().getDistance(pos) <= 1 && board.getTerrainAt(pos)==0)
                 {

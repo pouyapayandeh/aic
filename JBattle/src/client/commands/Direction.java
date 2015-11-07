@@ -7,7 +7,8 @@ import core.math.Vector2D;
  */
 public enum Direction
 {
-    /* TODO : rename this to FourWayDirection
+    /*
+       TODO : rename this to FourWayDirection
        TODO : move this too framework
        TODO : implement EightWayDirection
     */

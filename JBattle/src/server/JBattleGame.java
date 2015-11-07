@@ -30,7 +30,7 @@ public class JBattleGame extends TurnBaseGame{
 
     boolean readyToPlay=false;
     @Override
-    public GamePlayer CurrentPlayer() {
+    public GamePlayer currentPlayer() {
         return players.get(cp);
     }
 
