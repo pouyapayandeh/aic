@@ -10,9 +10,9 @@ import java.util.ArrayList;
  */
 public class WorldModel {
     private int[][] terrain;
-    ArrayList<ClientGoldMine> goldMines;
-    ClientPlayer self;
-    ArrayList<ClientPlayer> others;
+    ArrayList<GoldMine> goldMines;
+    Player self;
+    ArrayList<Player> others;
     public WorldModel() {
         goldMines=new ArrayList<>();
         others = new ArrayList<>();
@@ -53,12 +53,12 @@ public class WorldModel {
         goldMines.clear();
         for(int i=0 ; i < array.length() ; i++)
         {
-            goldMines.add(new ClientGoldMine(array.getJSONObject(i)));
+            goldMines.add(new GoldMine(array.getJSONObject(i)));
         }
     }
     void setSelf(JSONObject data)
     {
-        self = new ClientPlayer(data);
+        self = new Player(data);
     }
     void update(JSONObject data)
     {
@@ -72,7 +72,7 @@ public class WorldModel {
                 self.updateAgents(player.getJSONArray("Agents").getJSONArray(0).getJSONArray(0));
             }else
             {
-                ClientPlayer oplayer = new ClientPlayer(player);
+                Player oplayer = new Player(player);
                 oplayer.updateAgents(player.getJSONArray("Agents").getJSONArray(0).getJSONArray(0));
                 others.add(oplayer);
             }

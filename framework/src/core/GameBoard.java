@@ -40,12 +40,12 @@ public class GameBoard implements JSONString{
             for(int j = 0 ;  j < heigh ; j++)
                 objects[i][j]=new ArrayList<>();
     }
-    public void initBoard(){};
+    public void initBoard(){}
     public int getTerrainAt(Vector2D pos)
     {
-        if(pos.getX() >= 0 && pos.getX() < width && pos.getY() >= 0 && pos.getY() < heigh)
+        if(pos.x >= 0 && pos.x < width && pos.y >= 0 && pos.y< heigh)
         {
-            return terrain[pos.getX()][pos.getY()];
+            return terrain[pos.x][pos.y];
         }
         return Integer.MIN_VALUE;
     }

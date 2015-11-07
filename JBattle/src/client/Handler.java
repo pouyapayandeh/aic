@@ -1,9 +1,8 @@
 package client;
 
-import core.math.Vector2D;
 import network.ClientSocket;
 import network.events.DataRecievedEvent;
-import client.commands.ClientMoveCommand;
+import client.commands.MoveCommand;
 import json.JSONObject;
 
 import java.util.Observable;
@@ -12,13 +11,13 @@ import java.util.Observer;
 /**
  * Created by Pouya Payandeh on 10/24/2015.
  */
-public class ClientNetworkHandler implements Observer {
+public class Handler implements Observer {
     ClientSocket socket;
     WorldModel wm;
     int phase = 0;
     boolean gameStarted=false;
     PlayerAI ai;
-    public ClientNetworkHandler( ClientSocket socket , WorldModel wm,PlayerAI ai) {
+    public Handler(ClientSocket socket, WorldModel wm, PlayerAI ai) {
         this.socket = socket;
         this.wm=wm;
         this.ai=ai;
@@ -27,7 +26,7 @@ public class ClientNetworkHandler implements Observer {
     public void doTurn(JSONObject data)
     {
         wm.update(data);
-        ClientMoveCommand cmd =ai.doTurn(wm);
+        MoveCommand cmd =ai.doTurn(wm);
         if(cmd != null)
             socket.response(cmd.toJSONString());
         else

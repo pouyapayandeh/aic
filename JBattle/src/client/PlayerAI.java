@@ -1,7 +1,7 @@
 package client;
 
 import core.math.Vector2D;
-import client.commands.ClientMoveCommand;
+import client.commands.MoveCommand;
 
 import java.util.Random;
 
@@ -10,19 +10,19 @@ import java.util.Random;
  */
 public class PlayerAI
 {
-    public ClientMoveCommand doTurn(WorldModel wm){
-        Vector2D pos = wm.self.agents.get(0).pos.clone();
+    public MoveCommand doTurn(WorldModel wm){
+        Vector2D pos = wm.self.agents.get(0).getPos();
         //wm.self.agents.get(0).
 
         Random r= new Random();
         if(r.nextDouble() > 0.5)
-            pos.setX(pos.getX()-1);
+            pos.x--;
         else
-            pos.setX(pos.getX()+1);
+            pos.x++;
 
 
 
-        ClientMoveCommand cmd =new ClientMoveCommand(0,pos);
+        MoveCommand cmd =new MoveCommand(0,pos);
         return cmd;
     }
 }

@@ -9,15 +9,15 @@ public abstract class BoardObject {
     Vector2D pos;
 
     public int getX() {
-        return pos.getX();
+        return pos.x;
     }
 
     public void setX(int x) {
-        pos.setX(x);
+        pos.x=x;
     }
 
     public int getY() {
-        return pos.getY();
+        return pos.y;
     }
 
     public Vector2D getPos() {
@@ -25,7 +25,7 @@ public abstract class BoardObject {
     }
 
     public void setY(int y) {
-        pos.setY(y);
+        pos.y=y;
     }
     public void setPosition(int x,int y){pos = new Vector2D(x,y);}
     public void setPosition(Vector2D pos){this.pos = pos;}

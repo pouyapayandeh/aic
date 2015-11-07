@@ -11,7 +11,7 @@ public class ClientMain {
         ClientSocket socket = new ClientSocket();
         WorldModel wm = new WorldModel();
         PlayerAI ai = new PlayerAI();
-        ClientNetworkHandler clientNetworkHandler = new ClientNetworkHandler(socket,wm,ai);
+        Handler clientNetworkHandler = new Handler(socket,wm,ai);
         socket.connect("localhost",1111);
         JSONObject object =new JSONObject();
         object.accumulate("name","Pouya");

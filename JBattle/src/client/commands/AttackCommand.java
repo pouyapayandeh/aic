@@ -2,16 +2,16 @@ package client.commands;
 
 import core.math.Vector2D;
 import json.JSONObject;
-import json.JSONString;
 
 /**
- * Created by Pouya Payandeh on 10/25/2015.
+ * Created by Pouya Payandeh on 11/7/2015.
  */
-public class ClientMoveCommand implements JSONString{
+public class AttackCommand implements Command
+{
     int id;
     Vector2D pos;
 
-    public ClientMoveCommand(int id, Vector2D pos) {
+    public AttackCommand(int id, Vector2D pos) {
         this.id = id;
         this.pos = pos;
     }
@@ -19,7 +19,7 @@ public class ClientMoveCommand implements JSONString{
     @Override
     public String toJSONString() {
         JSONObject obj = new JSONObject();
-        obj.put("cmd","move");
+        obj.put("cmd","attack");
         obj.put("id",id);
         obj.put("pos",pos);
         return obj.toString();
