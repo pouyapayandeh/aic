@@ -17,10 +17,6 @@ public class JBPlayer extends GamePlayer implements JSONString {
     }
 
     ClientSocket socket;
-    public JBPlayer() {
-        gold =Settings.StartGold;
-    }
-
 
     @Override
     public String toJSONString() {

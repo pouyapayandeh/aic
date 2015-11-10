@@ -40,15 +40,15 @@ public class MakeCommand extends BasicCommand
                 }
                 if(!res)
                 {
-                    if(type == "WARRIOR")
+                    if(type.equals ("WARRIOR") )
                     {
-                        game.addAgents(tg.currentPlayer(), new Warrior());
+                        game.addAgents(tg.currentPlayer(), new Warrior(pos));
                         ((JBPlayer)tg.currentPlayer()).gold-= Settings.WarriorCost;
                     }
-                    else if (type == "WORKER")
+                    else if (type.equals("WORKER"))
                     {
 
-                            game.addAgents(tg.currentPlayer(), new Worker());
+                            game.addAgents(tg.currentPlayer(), new Worker(pos));
                         ((JBPlayer)tg.currentPlayer()).gold-= Settings.WorkerCost;
                     }
                 }

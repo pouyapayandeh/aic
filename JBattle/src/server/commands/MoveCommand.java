@@ -2,6 +2,7 @@ package server.commands;
 
 import core.*;
 import core.math.Vector2D;
+import server.agents.Unit;
 
 import java.util.ArrayList;
 
@@ -24,10 +25,20 @@ public class MoveCommand extends BasicCommand {
                 if(agent.getPos().getDistance(pos) <= 1 && board.getTerrainAt(pos)==0)
                 {
                     ArrayList<BoardObject>[][] objects =tg.getBoard().getObjects();
-                    boolean res = objects[agent.getX()][agent.getY()].remove(agent);
-                    assert (res == true);
-                    agent.setPosition(pos);
-                    objects[agent.getX()][agent.getY()].add(agent);
+                    Unit res = null;
+                    for(BoardObject obj : objects[pos.x][pos.y])
+                    {
+                        if(obj instanceof Unit)
+                            res = (Unit) obj;
+                    }
+
+                    if(res == null)
+                    {
+                        boolean res1 = objects[agent.getX()][agent.getY()].remove(agent);
+                        assert (res1 == true);
+                        agent.setPosition(pos);
+                        objects[agent.getX()][agent.getY()].add(agent);
+                    }
                 }
             }
         }

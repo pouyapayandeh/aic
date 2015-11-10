@@ -31,9 +31,12 @@ public class AttackCommand extends BasicCommand
                     if(obj instanceof Unit)
                         res = (Unit) obj;
                 }
-                res.HP-=((Unit)agent).ATK;
-                if(res.HP < 0)
-                    game.removeAgent(res);
+                if(res != null)
+                {
+                    res.HP -= ((Unit) agent).ATK;
+                    if (res.HP <= 0)
+                        game.removeAgent(res);
+                }
             }
         }
     }

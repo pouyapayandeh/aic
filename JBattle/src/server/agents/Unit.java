@@ -1,6 +1,7 @@
 package server.agents;
 
 import core.GameAgent;
+import core.math.Vector2D;
 import json.JSONObject;
 import json.JSONString;
 
@@ -22,7 +23,8 @@ public class Unit extends GameAgent implements JSONString {
         this.type=type;
     }
 
-    public Unit(String type,int HP,int ATK) {
+    public Unit(Vector2D pos ,String type, int HP, int ATK) {
+        setPosition(pos.clone());
         this.type=type;
         this.HP = HP;
         this.ATK = ATK;

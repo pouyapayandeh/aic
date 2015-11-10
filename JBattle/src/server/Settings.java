@@ -9,9 +9,10 @@ public interface Settings {
     int WarrioHP =20;
     int WarriorATK =7;
     int CastleHP=40;
-    int CastleATK=5;
+    int CastleATK=1;
     int WorkerCost=10;
     int WarriorCost=15;
     int TurnGold = 8;
     int StartGold = 10;
+    int GoldGain = 8;
 }

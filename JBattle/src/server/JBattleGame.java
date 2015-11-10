@@ -45,9 +45,9 @@ public class JBattleGame extends TurnBaseGame{
     public void start() {
         for (int i = 0; i < maxPlayer; i++)
         {
-            Castle castle = new Castle();
-            castle.setPosition(playerLoc.get(i));
+            Castle castle = new Castle(playerLoc.get(i));
             addAgents(players.get(i),castle);
+            ((JBPlayer)players.get(i)).gold=Settings.StartGold;
         }
         started=true;
         super.start();
@@ -59,7 +59,10 @@ public class JBattleGame extends TurnBaseGame{
         {
             try {
                 Scanner reader = new Scanner(mapfile);
-                int goldNum , playerNum;
+                int goldNum , playerNum , mapLines;
+                mapLines = reader.nextInt();
+                for(int i = 0 ; i < mapLines + 1 ; i++)
+                    reader.nextLine();
                 goldNum = reader.nextInt();
                 playerNum = reader.nextInt();
                 maxPlayer = playerNum;
@@ -88,6 +91,7 @@ public class JBattleGame extends TurnBaseGame{
     @Override
     public void doTurn()
     {
+        ((JBPlayer)players.get(cp)).gold+=Settings.TurnGold;
         cp=(cp+1)%maxPlayer;
     }
 }

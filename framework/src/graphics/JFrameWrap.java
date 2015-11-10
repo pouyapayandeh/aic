@@ -49,18 +49,7 @@ public class JFrameWrap extends JFrame {
 
     public void initUI(GameGraphicalRepresentation ggr)
     {
-        this.ggr= ggr;
-        panel=new JPanel();
-        this.add(panel);
-        panel.setSize(ggr.bgr.getTotalWidth(),ggr.bgr.getTotalHeight());
-        panel.setPreferredSize(new Dimension(ggr.bgr.getTotalWidth(),ggr.bgr.getTotalHeight()));
-
-        setResizable(false);
-        setVisible(true);
-        pack();
-
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        timer.start();
+        initUI(ggr,ggr.bgr.getTotalWidth(),ggr.bgr.getTotalHeight());
 
     }
 

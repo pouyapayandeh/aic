@@ -24,17 +24,19 @@ public class JBattleGR extends GameGraphicalRepresentation {
     @Override
     public BufferedImage getFrame() {
         BufferedImage img = bgr.getTerrainImage();
-        ArrayList<GameAgent> allAgents = game.getAllAgents();
         Graphics2D g =img.createGraphics();
-        for(GameAgent agent : allAgents)
-        {
-            agr.drawAgent(agent,g);
-        }
         ArrayList<BoardObject> boardObjects = game.getBoardObjects();
         for(BoardObject obj : boardObjects)
         {
             agr.drawObject(obj,g);
         }
+        ArrayList<GameAgent> allAgents = game.getAllAgents();
+
+        for(GameAgent agent : allAgents)
+        {
+            agr.drawAgent(agent,g);
+        }
+
 
         return img;
     }

@@ -87,7 +87,7 @@ public class NetworkHandler implements Observer{
     {
         game.doTurn();
         JBPlayer player = (JBPlayer)game.currentPlayer();
-        player.lastMoveTime=System.nanoTime();
+        player.lastMoveTime=System.currentTimeMillis();
         player.socket.response(turnData().toString());
         changeTurnTimer.start();
     }
@@ -143,8 +143,8 @@ public class NetworkHandler implements Observer{
                 }
             }
         }
-        System.out.println(System.nanoTime() - player.lastMoveTime);
-        player.lastMoveTime = System.nanoTime();
+        System.out.println(System.currentTimeMillis() - player.lastMoveTime);
+        player.lastMoveTime = System.currentTimeMillis();
 
     }
     @Override
