@@ -23,22 +23,22 @@ public class UnitGR extends BoardObjectGraphicalRepresentation {
         texture_warrior = new BufferedImage[2];
         texture_worker = new BufferedImage[2];
         texture_castle[0] = new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_ARGB);
-        loadTexture(texture_castle[0], "castle_0.png");
+        loadTexture(texture_castle[0], "castle_blue.png");
         texture_castle[1] = new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_ARGB);
-        loadTexture(texture_castle[1], "castle_1.png");
+        loadTexture(texture_castle[1], "castle_red.png");
 
         texture_warrior[0] = new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_ARGB);
-        loadTexture(texture_warrior[0], "warrior_0.png");
+        loadTexture(texture_warrior[0], "swordsman_blue.png");
         texture_warrior[1] = new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_ARGB);
-        loadTexture(texture_warrior[1], "warrior_1.png");
+        loadTexture(texture_warrior[1], "swordsman_red.png");
 
         texture_worker[0] = new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_ARGB);
-        loadTexture(texture_worker[0], "worker_0.png");
+        loadTexture(texture_worker[0], "worker_blue.png");
 
         texture_worker[1] = new BufferedImage(tileWidth,tileHeight,BufferedImage.TYPE_INT_ARGB);
-        loadTexture(texture_worker[1], "worker_1.png");
+        loadTexture(texture_worker[1], "worker_red.png");
 
-        loadTexture(texture_gold, "texture_gold.png");
+        loadTexture(texture_gold, "gold.png");
     }
 
     @Override
