@@ -1,6 +1,5 @@
 package server.agents;
 
-import core.GameAgent;
 import core.math.Vector2D;
 import server.Settings;
 
@@ -9,7 +8,7 @@ import server.Settings;
  */
 public class Worker extends Unit {
     public Worker(Vector2D pos) {
-        super(pos,"WORKER", Settings.WorkerHP,Settings.WarriorATK);
+        super(pos,"WORKER", Settings.WorkerHP,Settings.WarriorATK, Settings.WorkerHP);
     }
 
 }

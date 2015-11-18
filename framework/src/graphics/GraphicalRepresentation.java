@@ -37,12 +37,7 @@ public class GraphicalRepresentation {
     public void loadTexture(BufferedImage img,String path)
     {
         try {
-            String filepath=getClass().getClassLoader().getResource(path).getFile();
-            filepath=filepath.replace("%20"," ");
-            filepath.replace(" ","\\ ");
-            File file =new File(filepath);
-
-            Image imgt = ImageIO.read(file).
+            Image imgt = ImageIO.read(getClass().getClassLoader().getResourceAsStream(path)).
                     getScaledInstance(tileWidth, tileHeight, Image.SCALE_SMOOTH);
             Graphics2D gr=img.createGraphics();
             gr.drawImage(imgt,0,0,null);

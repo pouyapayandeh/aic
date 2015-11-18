@@ -9,6 +9,6 @@ import server.Settings;
 public class Castle extends  Unit {
 
     public Castle(Vector2D pos) {
-        super(pos,"CASTLE",Settings.CastleHP,Settings.CastleATK);
+        super(pos,"CASTLE",Settings.CastleHP,Settings.CastleATK, Settings.CastleHP);
     }
 }

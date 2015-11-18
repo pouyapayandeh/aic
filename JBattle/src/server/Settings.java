@@ -6,7 +6,7 @@ package server;
 public interface Settings {
     int WorkerHP=10;
     int WorkerATK=2;
-    int WarrioHP =20;
+    int WarriorHP =20;
     int WarriorATK =7;
     int CastleHP=40;
     int CastleATK=1;

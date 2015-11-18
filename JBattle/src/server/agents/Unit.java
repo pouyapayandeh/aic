@@ -11,6 +11,7 @@ import json.JSONString;
 public class Unit extends GameAgent implements JSONString {
     public int HP;
     public int ATK;
+    public final int MaxHP;
     public int movePerTurn;
 
     public String getType() {
@@ -19,11 +20,13 @@ public class Unit extends GameAgent implements JSONString {
 
     protected final String type;
 
-    public Unit(String type) {
+    public Unit(int maxHP, String type) {
+        MaxHP = maxHP;
         this.type=type;
     }
 
-    public Unit(Vector2D pos ,String type, int HP, int ATK) {
+    public Unit(Vector2D pos, String type, int HP, int ATK, int maxHP) {
+        MaxHP = maxHP;
         setPosition(pos.clone());
         this.type=type;
         this.HP = HP;

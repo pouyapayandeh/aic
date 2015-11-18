@@ -53,14 +53,14 @@ public class BattleGroundGR extends BoardGraphicalRepresentation {
                     if (terrain[x][y] == 0)
                     {
                         double c =r.nextDouble();
-                        if(c < 0.85)
+                        if(c < 0.40)
+                            g.drawImage(terrain_grass4, totalX, totalY, null);
+                        else if(c < 0.80)
                             g.drawImage(terrain_grass1, totalX, totalY, null);
                         else if(c < 0.90)
-                            g.drawImage(terrain_grass2, totalX, totalY, null);
-                        else if(c < 0.95)
                             g.drawImage(terrain_grass3, totalX, totalY, null);
                         else
-                            g.drawImage(terrain_grass4, totalX, totalY, null);
+                            g.drawImage(terrain_grass2, totalX, totalY, null);
 
 
 

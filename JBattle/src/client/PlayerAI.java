@@ -25,12 +25,16 @@ public class PlayerAI
                 mc.move(Direction.S);
             else if(chance < 0.75)
                 mc.move(Direction.E);
-            else if(chance < 0.1)
+            else
                 mc.move(Direction.W);
         }
 
-        c.make(Direction.E,UnitType.WORKER);
         if(r.nextDouble() > 0.5)
-        c.attack(Direction.E);
+            c.make(Direction.E,UnitType.WORKER);
+        else
+            c.make(Direction.W,UnitType.WORKER);
+
+        if(r.nextDouble() > 0.5)
+            c.attack(Direction.E);
     }
 }

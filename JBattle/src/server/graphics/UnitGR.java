@@ -3,6 +3,7 @@ package server.graphics;
 import core.BoardObject;
 import core.GameAgent;
 import graphics.BoardObjectGraphicalRepresentation;
+import server.agents.Unit;
 import server.objects.GoldMine;
 import server.agents.Warrior;
 import server.agents.Worker;
@@ -57,6 +58,18 @@ public class UnitGR extends BoardObjectGraphicalRepresentation {
             image=texture_castle[ag.getOwner().getPlayerId()];
         }
         g.drawImage(image,x,y,null);
+        // Draw Health Bar
+
+        g.setColor(Color.red);
+        int hbHeigh = (int) (tileHeight * 0.1); //Health Bar Heigh
+        int hx , hy ,healthToPixel;
+        hx = x;
+        hy = y + tileHeight - hbHeigh;
+        Unit u = (Unit) ag;
+        healthToPixel = (int) (((float)u.HP / u.MaxHP) * tileWidth);
+        g.fillRect(hx+1,hy,healthToPixel-1,hbHeigh);
+        //
+
     }
 
     @Override

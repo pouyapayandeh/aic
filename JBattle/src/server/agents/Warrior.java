@@ -1,6 +1,5 @@
 package server.agents;
 
-import core.GameAgent;
 import core.math.Vector2D;
 import server.Settings;
 
@@ -9,6 +8,6 @@ import server.Settings;
  */
 public class Warrior extends Unit {
     public Warrior(Vector2D pos) {
-        super(pos,"WARRIOR", Settings.WarrioHP,Settings.WarriorATK);
+        super(pos,"WARRIOR", Settings.WarriorHP,Settings.WarriorATK, Settings.WarriorHP);
     }
 }
