@@ -1,6 +1,6 @@
 package client.commands;
 
-import json.JSONString;
+import org.json.JSONString;
 
 /**
  * Created by Pouya Payandeh on 11/7/2015.

@@ -56,7 +56,7 @@ public class ClientSocket  implements  Runnable{
             osw = new OutputStreamWriter(socket.getOutputStream());
             thread.start();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Could not connect to given host");
         }
     }
     public void response(String s)

@@ -1,8 +1,8 @@
 package client.commands;
 
 import core.math.Vector2D;
-import json.JSONObject;
-import json.JSONString;
+import org.json.JSONObject;
+import org.json.JSONString;
 
 /**
  * Created by Pouya Payandeh on 10/25/2015.

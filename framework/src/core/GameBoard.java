@@ -1,9 +1,9 @@
 package core;
 
 import core.math.Vector2D;
-import json.JSONArray;
-import json.JSONObject;
-import json.JSONString;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONString;
 
 import java.util.ArrayList;
 

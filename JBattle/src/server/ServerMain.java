@@ -1,5 +1,6 @@
 package server;
 
+import com.beust.jcommander.JCommander;
 import core.Game;
 import core.MapBoard;
 import graphics.JFrameWrap;
@@ -14,21 +15,54 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class ServerMain {
     public static void main(String[] args) {
-        JFrameWrap frameWrap =new JFrameWrap();
-        JFileChooser jFileChooser = new JFileChooser();
-        jFileChooser.setFileFilter(new FileNameExtensionFilter("JBATTLE MAP FILE(*.map)","map"));
-        if(jFileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION )
+
+
+        CommandLine jct = new CommandLine();
+        boolean error = false;
+        new JCommander(jct,args);
+        if(jct.cli)
         {
-            String path = jFileChooser.getSelectedFile().getPath();
-            System.out.println(path);
-            MapBoard b = new MapBoard(path);
+            if(jct.mapPath.equals(""))
+            {
+                error = true;
+                System.err.println("No Map File Address Entered");
+            }
+
+        }
+        else
+        {
+            JFrameWrap frameWrap =new JFrameWrap();
+            if(jct.mapPath.equals(""))
+            {
+                JFileChooser jFileChooser = new JFileChooser();
+                jFileChooser.setFileFilter(new FileNameExtensionFilter("JBATTLE MAP FILE(*.map)","map"));
+                if(jFileChooser.showOpenDialog(null) != JFileChooser.APPROVE_OPTION )
+                {
+                    System.err.println("No Map File Selected");
+                    error = true;
+                }else
+                {
+                    jct.mapPath=jFileChooser.getSelectedFile().getPath();
+                }
+            }
+        }
+        if(!error)
+        {
+            System.out.println(jct.mapPath);
+            MapBoard b = new MapBoard(jct.mapPath);
             b.initBoard();
             JBattleGame g = new JBattleGame();
-            g.loadPositionFile(path);
+            g.loadPositionFile(jct.mapPath);
             g.setBoard(b);
-            JBattleGR jBattleGR = new JBattleGR(g);
-            frameWrap.initUI(jBattleGR);
-            GameServer server = new GameServer(1111);
+
+            if (!jct.cli)
+            {
+                JBattleGR jBattleGR = new JBattleGR(g);
+                JFrameWrap frameWrap = new JFrameWrap();
+                frameWrap.initUI(jBattleGR);
+            }
+
+            GameServer server = new GameServer(jct.port.intValue());
             NetworkHandler networkHandler = new NetworkHandler(g, server);
             server.startServer();
         }

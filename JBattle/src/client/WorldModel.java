@@ -1,7 +1,7 @@
 package client;
 
-import json.JSONArray;
-import json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 

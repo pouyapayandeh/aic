@@ -4,7 +4,6 @@ import core.BoardObject;
 import core.Game;
 import core.GameAgent;
 import graphics.GameGraphicalRepresentation;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

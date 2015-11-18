@@ -2,9 +2,9 @@ package server;
 
 import core.GamePlayer;
 import network.ClientSocket;
-import json.JSONArray;
-import json.JSONObject;
-import json.JSONString;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONString;
 
 /**
  * Created by Pouya Payandeh on 10/24/2015.

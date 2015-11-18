@@ -4,7 +4,7 @@ import client.commands.Command;
 import network.ClientSocket;
 import network.events.DataRecievedEvent;
 import client.commands.MoveCommand;
-import json.JSONObject;
+import org.json.JSONObject;
 
 import java.util.Observable;
 import java.util.Observer;

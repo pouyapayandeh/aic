@@ -10,5 +10,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="framework" />
+    <orderEntry type="library" name="org.json" level="project" />
+    <orderEntry type="library" name="com.beust:jcommander:1.48" level="project" />
   </component>
 </module>

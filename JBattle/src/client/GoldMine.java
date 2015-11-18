@@ -1,7 +1,7 @@
 package client;
 
 import core.math.Vector2D;
-import json.JSONObject;
+import org.json.JSONObject;
 
 /**
  * Created by Pouya Payandeh on 10/24/2015.

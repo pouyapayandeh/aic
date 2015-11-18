@@ -13,8 +13,8 @@ import server.commands.AttackCommand;
 import server.commands.BasicCommand;
 import server.commands.MakeCommand;
 import server.commands.MoveCommand;
-import json.JSONArray;
-import json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
